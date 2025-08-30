@@ -1,0 +1,260 @@
+<div class="container mx-auto p-4 sm:p-6 max-w-4xl">
+  <div class="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <h2 class="text-xl sm:text-2xl font-bold text-gray-800">Create New User</h2>
+  </div>
+
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="bg-white shadow-lg rounded-lg p-4 sm:p-6">
+
+    <div class="mb-6 sm:mb-8">
+      <h3 class="text-base sm:text-lg font-semibold text-gray-700 mb-4 border-b pb-2">Basic Information</h3>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Name *</label>
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+            [class.border-red-500]="userForm.get('name')?.invalid && userForm.get('name')?.touched">
+            @if ( getErrorMessage('name') ) {
+                <div  class="text-red-500 text-xs sm:text-sm mt-1">
+                  {{ getErrorMessage('name') }}
+                </div>
+            }
+        </div>
+
+        <div>
+          <label for="username" class="block text-sm font-medium text-gray-700 mb-2">Username *</label>
+          <input
+            type="text"
+            id="username"
+            formControlName="username"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+            [class.border-red-500]="userForm.get('username')?.invalid && userForm.get('username')?.touched">
+                        @if ( getErrorMessage('username') ) {
+                <div  class="text-red-500 text-xs sm:text-sm mt-1">
+                  {{ getErrorMessage('username') }}
+                </div>
+            }
+        </div>
+
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+            [class.border-red-500]="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+            @if ( getErrorMessage('email') ) {
+                <div  class="text-red-500 text-xs sm:text-sm mt-1">
+                  {{ getErrorMessage('email') }}
+                </div>
+            }
+        </div>
+
+        <div>
+          <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone *</label>
+          <input
+            type="tel"
+            id="phone"
+            formControlName="phone"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+            [class.border-red-500]="userForm.get('phone')?.invalid && userForm.get('phone')?.touched">
+            @if ( getErrorMessage('phone') ) {
+                <div  class="text-red-500 text-xs sm:text-sm mt-1">
+                  {{ getErrorMessage('phone') }}
+                </div>
+            }
+        </div>
+
+        <div class="sm:col-span-2">
+          <label for="website" class="block text-sm font-medium text-gray-700 mb-2">Website *</label>
+          <input
+            type="url"
+            id="website"
+            formControlName="website"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+            [class.border-red-500]="userForm.get('website')?.invalid && userForm.get('website')?.touched">
+            @if ( getErrorMessage('website') ) {
+                <div  class="text-red-500 text-xs sm:text-sm mt-1">
+                  {{ getErrorMessage('website') }}
+                </div>
+            }
+        </div>
+      </div>
+    </div>
+
+    <!-- Address Information -->
+    <div class="mb-6 sm:mb-8" formGroupName="address">
+      <h3 class="text-base sm:text-lg font-semibold text-gray-700 mb-4 border-b pb-2">Address Information</h3>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+        <div>
+          <label for="street" class="block text-sm font-medium text-gray-700 mb-2">Street *</label>
+          <input
+            type="text"
+            id="street"
+            formControlName="street"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+            [class.border-red-500]="userForm.get('address.street')?.invalid && userForm.get('address.street')?.touched">
+            @if ( getErrorMessage('address.street') ) {
+                <div  class="text-red-500 text-xs sm:text-sm mt-1">
+                  {{ getErrorMessage('address.street') }}
+                </div>
+            }
+        </div>
+
+        <div>
+          <label for="suite" class="block text-sm font-medium text-gray-700 mb-2">Suite *</label>
+          <input
+            type="text"
+            id="suite"
+            formControlName="suite"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+            [class.border-red-500]="userForm.get('address.suite')?.invalid && userForm.get('address.suite')?.touched">
+            @if ( getErrorMessage('address.suite') ) {
+                <div  class="text-red-500 text-xs sm:text-sm mt-1">
+                  {{ getErrorMessage('address.suite') }}
+                </div>
+            }
+        </div>
+
+        <div>
+          <label for="city" class="block text-sm font-medium text-gray-700 mb-2">City *</label>
+          <input
+            type="text"
+            id="city"
+            formControlName="city"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+            [class.border-red-500]="userForm.get('address.city')?.invalid && userForm.get('address.city')?.touched">
+            @if ( getErrorMessage('address.city') ) {
+                <div  class="text-red-500 text-xs sm:text-sm mt-1">
+                  {{ getErrorMessage('address.city') }}
+                </div>
+            }
+        </div>
+
+        <div>
+          <label for="zipcode" class="block text-sm font-medium text-gray-700 mb-2">Zipcode *</label>
+          <input
+            type="text"
+            id="zipcode"
+            formControlName="zipcode"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+            [class.border-red-500]="userForm.get('address.zipcode')?.invalid && userForm.get('address.zipcode')?.touched">
+            @if ( getErrorMessage('address.zipcode') ) {
+                <div  class="text-red-500 text-xs sm:text-sm mt-1">
+                  {{ getErrorMessage('address.zipcode') }}
+                </div>
+            }
+        </div>
+      </div>
+
+      <!-- Geo Coordinates -->
+      <div class="mt-4 sm:mt-6" formGroupName="geo">
+        <h4 class="text-sm sm:text-md font-medium text-gray-600 mb-3">Geographic Coordinates</h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+          <div>
+            <label for="lat" class="block text-sm font-medium text-gray-700 mb-2">Latitude *</label>
+            <input
+              type="text"
+              id="lat"
+              formControlName="lat"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+              [class.border-red-500]="userForm.get('address.geo.lat')?.invalid && userForm.get('address.geo.lat')?.touched">
+              @if ( getErrorMessage('address.geo.lat') ) {
+                <div  class="text-red-500 text-xs sm:text-sm mt-1">
+                  {{ getErrorMessage('address.geo.lat') }}
+                </div>
+              }
+          </div>
+
+          <div>
+            <label for="lng" class="block text-sm font-medium text-gray-700 mb-2">Longitude *</label>
+            <input
+              type="text"
+              id="lng"
+              formControlName="lng"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+              [class.border-red-500]="userForm.get('address.geo.lng')?.invalid && userForm.get('address.geo.lng')?.touched">
+              @if ( getErrorMessage('address.geo.lng') ) {
+                <div  class="text-red-500 text-xs sm:text-sm mt-1">
+                  {{ getErrorMessage('address.geo.lng') }}
+                </div>
+              }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-6 sm:mb-8" formGroupName="company">
+      <h3 class="text-base sm:text-lg font-semibold text-gray-700 mb-4 border-b pb-2">Company Information</h3>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+        <div>
+          <label for="companyName" class="block text-sm font-medium text-gray-700 mb-2">Company Name *</label>
+          <input
+            type="text"
+            id="companyName"
+            formControlName="name"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+            [class.border-red-500]="userForm.get('company.name')?.invalid && userForm.get('company.name')?.touched">
+            @if ( getErrorMessage('company.name') ) {
+                <div  class="text-red-500 text-xs sm:text-sm mt-1">
+                  {{ getErrorMessage('company.name') }}
+                </div>
+            }
+        </div>
+
+        <div>
+          <label for="catchPhrase" class="block text-sm font-medium text-gray-700 mb-2">Catch Phrase *</label>
+          <input
+            type="text"
+            id="catchPhrase"
+            formControlName="catchPhrase"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+            [class.border-red-500]="userForm.get('company.catchPhrase')?.invalid && userForm.get('company.catchPhrase')?.touched">
+            @if ( getErrorMessage('company.catchPhrase') ) {
+                <div  class="text-red-500 text-xs sm:text-sm mt-1">
+                  {{ getErrorMessage('company.catchPhrase') }}
+                </div>
+            }
+        </div>
+
+        <div class="sm:col-span-2">
+          <label for="bs" class="block text-sm font-medium text-gray-700 mb-2">Business Strategy *</label>
+          <input
+            type="text"
+            id="bs"
+            formControlName="bs"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+            [class.border-red-500]="userForm.get('company.bs')?.invalid && userForm.get('company.bs')?.touched">
+            @if ( getErrorMessage('company.bs') ) {
+                <div  class="text-red-500 text-xs sm:text-sm mt-1">
+                  {{ getErrorMessage('company.bs') }}
+                </div>
+            }
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="flex flex-col sm:flex-row justify-end space-y-3 sm:space-y-0 sm:space-x-4 pt-4 sm:pt-6 border-t">
+      <button
+        type="button"
+        (click)="cancel()"
+        class="w-full sm:w-auto px-6 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors text-sm font-medium">
+        Cancel
+      </button>
+      <button
+        type="submit"
+        [disabled]="loading || userForm.invalid"
+        class="w-full sm:w-auto px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors text-sm font-medium">
+        <span *ngIf="loading" class="inline-block animate-spin mr-2">⏳</span>
+        {{ loading ? 'Creating...' : 'Create User' }}
+      </button>
+    </div>
+  </form>
+</div>
