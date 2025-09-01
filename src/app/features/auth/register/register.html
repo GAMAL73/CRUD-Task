@@ -1,0 +1,183 @@
+<div class="flex items-center justify-center md:p-12">
+    <div class="mx-auto w-full md:w-3/4 py-5 md:py-0">
+      <h2 class="text-4xl font-semibold mb-9 px-0 mx-0 text-zinc-700">Register Now:</h2>
+        <form [formGroup]="registerForm" (ngSubmit)="submitFormRegister()">
+
+          @if (errMsg) {
+            <div class="bg-red-200 px-6 py-4  my-1 rounded-md text-lg flex items-center max-w-lg">
+                <svg viewBox="0 0 24 24" class="text-red-600 w-5 h-5 sm:w-5 sm:h-5 mr-3">
+                    <path fill="currentColor"
+                      d="M11.983,0a12.206,12.206,0,0,0-8.51,3.653A11.8,11.8,0,0,0,0,12.207,11.779,11.779,0,0,0,11.8,24h.214A12.111,12.111,0,0,0,24,11.791h0A11.766,11.766,0,0,0,11.983,0ZM10.5,16.542a1.476,1.476,0,0,1,1.449-1.53h.027a1.527,1.527,0,0,1,1.523,1.47,1.475,1.475,0,0,1-1.449,1.53h-.027A1.529,1.529,0,0,1,10.5,16.542ZM11,12.5v-6a1,1,0,0,1,2,0v6a1,1,0,1,1-2,0Z">
+                    </path>
+                </svg>
+                <span class="text-red-800">{{errMsg}}</span>
+            </div>
+          }
+            <div class="mb-5">
+                <label
+                    for="name"
+                    class="mb-3 block text-base font-medium text-zinc-700"
+                >
+                    Name:
+                </label>
+                <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    formControlName="name"
+                    placeholder="Full Name"
+                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-main outline-none focus:border-main focus:shadow-md"
+                />
+              @if (registerForm.get('name')?.errors && registerForm.get('name')?.touched) {
+                <div class="bg-red-200 px-6 py-4  my-1 rounded-md text-lg flex items-center max-w-lg">
+                  <svg viewBox="0 0 24 24" class="text-red-600 w-5 h-5 sm:w-5 sm:h-5 mr-3">
+                      <path fill="currentColor"
+                        d="M11.983,0a12.206,12.206,0,0,0-8.51,3.653A11.8,11.8,0,0,0,0,12.207,11.779,11.779,0,0,0,11.8,24h.214A12.111,12.111,0,0,0,24,11.791h0A11.766,11.766,0,0,0,11.983,0ZM10.5,16.542a1.476,1.476,0,0,1,1.449-1.53h.027a1.527,1.527,0,0,1,1.523,1.47,1.475,1.475,0,0,1-1.449,1.53h-.027A1.529,1.529,0,0,1,10.5,16.542ZM11,12.5v-6a1,1,0,0,1,2,0v6a1,1,0,1,1-2,0Z">
+                      </path>
+                  </svg>
+                  @if (registerForm.get('name')?.errors?.['required']) {
+                    <span class="text-red-800"> Your Name is Required. </span>
+                  }@else if (registerForm.get('name')?.errors?.['minlength']) {
+                    <span class="text-red-800"> Your Name must be at least 3 characters.</span>
+                  }@else if(registerForm.get('name')?.errors?.['maxlength']) {
+                    <span class="text-red-800"> Your Name must not be more than 10 characters. </span>
+                  }
+              </div>
+              }
+            </div>
+            <div class="mb-5">
+                <label
+                    for="email"
+                    class="mb-3 block text-base font-medium text-zinc-700"
+                >
+                Email:
+                </label>
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    formControlName="email"
+                    placeholder="Email"
+                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-main outline-none focus:border-main focus:shadow-md"
+                />
+                @if (registerForm.get('email')?.errors && registerForm.get('email')?.touched) {
+                  <div class="bg-red-200 px-6 py-4  my-1 rounded-md text-lg flex items-center max-w-lg">
+                    <svg viewBox="0 0 24 24" class="text-red-600 w-5 h-5 sm:w-5 sm:h-5 mr-3">
+                        <path fill="currentColor"
+                          d="M11.983,0a12.206,12.206,0,0,0-8.51,3.653A11.8,11.8,0,0,0,0,12.207,11.779,11.779,0,0,0,11.8,24h.214A12.111,12.111,0,0,0,24,11.791h0A11.766,11.766,0,0,0,11.983,0ZM10.5,16.542a1.476,1.476,0,0,1,1.449-1.53h.027a1.527,1.527,0,0,1,1.523,1.47,1.475,1.475,0,0,1-1.449,1.53h-.027A1.529,1.529,0,0,1,10.5,16.542ZM11,12.5v-6a1,1,0,0,1,2,0v6a1,1,0,1,1-2,0Z">
+                        </path>
+                    </svg>
+                    @if (registerForm.get('email')?.errors?.['required']) {
+                      <span class="text-red-800"> Your Email is Required. </span>
+                    }@else if (registerForm.get('email')?.errors?.['email']) {
+                      <span class="text-red-800"> Your email address is invalid.</span>
+                    }
+                </div>
+                }
+            </div>
+            <div class="mb-5">
+                <label
+                    for="password"
+                    class="mb-3 block text-base font-medium text-zinc-700"
+                >
+                Password:
+                </label>
+                <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    formControlName="password"
+                    placeholder="password"
+                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-main outline-none focus:border-main focus:shadow-md"
+                />
+                @if (registerForm.get('password')?.errors && registerForm.get('password')?.touched) {
+                  <div class="bg-red-200 px-6 py-4  my-1 rounded-md text-lg flex items-center max-w-lg">
+                    <svg viewBox="0 0 24 24" class="text-red-600 w-5 h-5 sm:w-5 sm:h-5 mr-3">
+                        <path fill="currentColor"
+                          d="M11.983,0a12.206,12.206,0,0,0-8.51,3.653A11.8,11.8,0,0,0,0,12.207,11.779,11.779,0,0,0,11.8,24h.214A12.111,12.111,0,0,0,24,11.791h0A11.766,11.766,0,0,0,11.983,0ZM10.5,16.542a1.476,1.476,0,0,1,1.449-1.53h.027a1.527,1.527,0,0,1,1.523,1.47,1.475,1.475,0,0,1-1.449,1.53h-.027A1.529,1.529,0,0,1,10.5,16.542ZM11,12.5v-6a1,1,0,0,1,2,0v6a1,1,0,1,1-2,0Z">
+                        </path>
+                    </svg>
+                    @if (registerForm.get('password')?.errors?.['required']) {
+                      <span class="text-red-800"> Your Password is Required. </span>
+                    }@else if (registerForm.get('password')?.errors?.['pattern']) {
+                      <span class="text-red-800"> Your Password invalid.</span>
+                    }
+                </div>
+                }
+            </div>
+            <div class="mb-5">
+                <label
+                    for="rePassword"
+                    class="mb-3 block text-base font-medium text-zinc-700"
+                >
+                rePassword:
+                </label>
+                <input
+                    type="password"
+                    name="rePassword"
+                    id="rePassword"
+                    formControlName="rePassword"
+                    placeholder="rePassword"
+                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-main outline-none focus:border-main focus:shadow-md"
+                />
+                @if (registerForm.get('rePassword')?.errors && registerForm.get('rePassword')?.touched) {
+                  <div class="bg-red-200 px-6 py-4  my-1 rounded-md text-lg flex items-center max-w-lg">
+                    <svg viewBox="0 0 24 24" class="text-red-600 w-5 h-5 sm:w-5 sm:h-5 mr-3">
+                        <path fill="currentColor"
+                          d="M11.983,0a12.206,12.206,0,0,0-8.51,3.653A11.8,11.8,0,0,0,0,12.207,11.779,11.779,0,0,0,11.8,24h.214A12.111,12.111,0,0,0,24,11.791h0A11.766,11.766,0,0,0,11.983,0ZM10.5,16.542a1.476,1.476,0,0,1,1.449-1.53h.027a1.527,1.527,0,0,1,1.523,1.47,1.475,1.475,0,0,1-1.449,1.53h-.027A1.529,1.529,0,0,1,10.5,16.542ZM11,12.5v-6a1,1,0,0,1,2,0v6a1,1,0,1,1-2,0Z">
+                        </path>
+                    </svg>
+                    @if (registerForm.get('rePassword')?.errors?.['required']) {
+                      <span class="text-red-800"> Your rePassword is Required. </span>
+                    }@else if (registerForm.get('rePassword')?.errors?.['notMatch']) {
+                      <span class="text-red-800"> Your rePassword is not a match. </span>
+                    }
+                </div>
+                }
+            </div>
+            <div class="mb-5">
+                <label
+                    for="phone"
+                    class="mb-3 block text-base font-medium text-zinc-700"
+                >
+                phone:
+                </label>
+                <input
+                    type="tel"
+                    name="phone"
+                    id="phone"
+                    formControlName="phone"
+                    placeholder="phone"
+                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-main outline-none focus:border-main focus:shadow-md"
+                />
+                @if (registerForm.get('phone')?.errors && registerForm.get('phone')?.touched) {
+                  <div class="bg-red-200 px-6 py-4  my-1 rounded-md text-lg flex items-center max-w-lg">
+                    <svg viewBox="0 0 24 24" class="text-red-600 w-5 h-5 sm:w-5 sm:h-5 mr-3">
+                        <path fill="currentColor"
+                          d="M11.983,0a12.206,12.206,0,0,0-8.51,3.653A11.8,11.8,0,0,0,0,12.207,11.779,11.779,0,0,0,11.8,24h.214A12.111,12.111,0,0,0,24,11.791h0A11.766,11.766,0,0,0,11.983,0ZM10.5,16.542a1.476,1.476,0,0,1,1.449-1.53h.027a1.527,1.527,0,0,1,1.523,1.47,1.475,1.475,0,0,1-1.449,1.53h-.027A1.529,1.529,0,0,1,10.5,16.542ZM11,12.5v-6a1,1,0,0,1,2,0v6a1,1,0,1,1-2,0Z">
+                        </path>
+                    </svg>
+                    @if (registerForm.get('phone')?.errors?.['required']) {
+                      <span class="text-red-800"> Your phone is Required. </span>
+                    }@else if (registerForm.get('phone')?.errors?.['pattern']) {
+                      <span class="text-red-800"> Invalid Phone Number. </span>
+                    }
+                </div>
+                }
+            </div>
+            <div class="text-end">
+                <a class="text-blue-500 underline me-2" routerLink="/login">Login</a>
+                <button
+                    class="hover:shadow-form rounded-md bg-main py-3 px-8 text-base font-semibold text-white outline-none hover:bg-gray-600 bg-black"
+                    [disabled]="registerForm.invalid"
+                >
+                    @if (loading) {
+                      <app-spinner></app-spinner>
+                    }@else {
+                      <span>Register</span>
+                    }
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

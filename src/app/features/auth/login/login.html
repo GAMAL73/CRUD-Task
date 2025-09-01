@@ -1,0 +1,91 @@
+<div class="flex items-center justify-center md:p-12 md:h-screen">
+  <div class="mx-auto w-full md:w-3/4 py-4 md:py-0">
+    <h2 class="md:text-4xl text-xl font-semibold mb-9 md:px-0 md:mx-0 text-zinc-700">Login Now:</h2>
+      <form [formGroup]="LoginForm" (ngSubmit)="submitFormLogin()">
+        @if (errMsg) {
+          <div class="bg-red-200 px-6 py-4  my-1 rounded-md text-lg flex items-center max-w-lg">
+              <svg viewBox="0 0 24 24" class="text-red-600 w-5 h-5 sm:w-5 sm:h-5 mr-3">
+                  <path fill="currentColor"
+                    d="M11.983,0a12.206,12.206,0,0,0-8.51,3.653A11.8,11.8,0,0,0,0,12.207,11.779,11.779,0,0,0,11.8,24h.214A12.111,12.111,0,0,0,24,11.791h0A11.766,11.766,0,0,0,11.983,0ZM10.5,16.542a1.476,1.476,0,0,1,1.449-1.53h.027a1.527,1.527,0,0,1,1.523,1.47,1.475,1.475,0,0,1-1.449,1.53h-.027A1.529,1.529,0,0,1,10.5,16.542ZM11,12.5v-6a1,1,0,0,1,2,0v6a1,1,0,1,1-2,0Z">
+                  </path>
+              </svg>
+              <span class="text-red-800">{{errMsg}}</span>
+          </div>
+        }
+          <div class="mb-5">
+              <label
+                  for="email"
+                  class="mb-3 block text-base font-medium text-zinc-700"
+              >
+              Email:
+              </label>
+              <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  formControlName="email"
+                  placeholder="Email"
+                  class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-main outline-none focus:border-main focus:shadow-md"
+              />
+              @if (LoginForm.get('email')?.errors && LoginForm.get('email')?.touched) {
+                <div class="bg-red-200 px-6 py-4  my-1 rounded-md text-lg flex items-center max-w-lg">
+                  <svg viewBox="0 0 24 24" class="text-red-600 w-5 h-5 sm:w-5 sm:h-5 mr-3">
+                      <path fill="currentColor"
+                        d="M11.983,0a12.206,12.206,0,0,0-8.51,3.653A11.8,11.8,0,0,0,0,12.207,11.779,11.779,0,0,0,11.8,24h.214A12.111,12.111,0,0,0,24,11.791h0A11.766,11.766,0,0,0,11.983,0ZM10.5,16.542a1.476,1.476,0,0,1,1.449-1.53h.027a1.527,1.527,0,0,1,1.523,1.47,1.475,1.475,0,0,1-1.449,1.53h-.027A1.529,1.529,0,0,1,10.5,16.542ZM11,12.5v-6a1,1,0,0,1,2,0v6a1,1,0,1,1-2,0Z">
+                      </path>
+                  </svg>
+                  @if (LoginForm.get('email')?.errors?.['required']) {
+                    <span class="text-red-800"> Your Email is Required. </span>
+                  }@else if (LoginForm.get('email')?.errors?.['email']) {
+                    <span class="text-red-800"> Your email address is invalid.</span>
+                  }
+              </div>
+              }
+          </div>
+          <div class="mb-5">
+              <label
+                  for="password"
+                  class="mb-3 block text-base font-medium text-zinc-700"
+              >
+              Password:
+              </label>
+              <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  formControlName="password"
+                  placeholder="password"
+                  class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-main outline-none focus:border-main focus:shadow-md"
+              />
+              @if (LoginForm.get('password')?.errors && LoginForm.get('password')?.touched) {
+                <div class="bg-red-200 px-6 py-4  my-1 rounded-md text-lg flex items-center max-w-lg">
+                  <svg viewBox="0 0 24 24" class="text-red-600 w-5 h-5 sm:w-5 sm:h-5 mr-3">
+                      <path fill="currentColor"
+                        d="M11.983,0a12.206,12.206,0,0,0-8.51,3.653A11.8,11.8,0,0,0,0,12.207,11.779,11.779,0,0,0,11.8,24h.214A12.111,12.111,0,0,0,24,11.791h0A11.766,11.766,0,0,0,11.983,0ZM10.5,16.542a1.476,1.476,0,0,1,1.449-1.53h.027a1.527,1.527,0,0,1,1.523,1.47,1.475,1.475,0,0,1-1.449,1.53h-.027A1.529,1.529,0,0,1,10.5,16.542ZM11,12.5v-6a1,1,0,0,1,2,0v6a1,1,0,1,1-2,0Z">
+                      </path>
+                  </svg>
+                  @if (LoginForm.get('password')?.errors?.['required']) {
+                    <span class="text-red-800"> Your Password is Required. </span>
+                  }@else if (LoginForm.get('password')?.errors?.['pattern']) {
+                    <span class="text-red-800"> Your Password invalid.</span>
+                  }
+              </div>
+              }
+          </div>
+          <div class="text-end">
+            <a class="text-blue-500 underline me-2" routerLink="/forgetPass">Forget password</a>
+            <a class="text-blue-500 underline me-2" routerLink="/Register">Create Account</a>
+              <button
+                  class="hover:shadow-form rounded-md bg-main py-3 px-8 text-base font-semibold text-white outline-none hover:bg-gray-600 bg-black"
+                  [disabled]="LoginForm.invalid"
+              >
+                  @if (loading) {
+                    <app-spinner></app-spinner>
+                  }@else {
+                    <span>Login</span>
+                  }
+              </button>
+          </div>
+      </form>
+  </div>
+</div>
