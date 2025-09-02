@@ -32,7 +32,6 @@ export class UserEdit implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-
     this.route.paramMap.pipe(
       takeUntilDestroyed(this.destroyRef),
       switchMap(params => {
@@ -49,8 +48,7 @@ export class UserEdit implements OnInit {
       next: (user) => {
         if (user) {
           this.userForm.patchValue(user);
-                  this.cdr.markForCheck();
-
+          this.cdr.markForCheck();
         }
       },
       error: (err) => {
@@ -84,22 +82,22 @@ export class UserEdit implements OnInit {
     });
   }
 
-  loadUser(): void {
-    if (!this.userId) return;
-    this.loading = true;
-    this.userService.getUserById(this.userId.toString()).pipe(
-      takeUntilDestroyed(this.destroyRef),
-      finalize(() => this.loading = false)
-    ).subscribe({
-      next: (user) => {
-        this.userForm.patchValue(user);
-        this.cdr.markForCheck();
-      },
-      error: (err) => {
-        console.error('Error loading user:', err);
-      }
-    });
-  }
+  // loadUser(): void {
+  //   if (!this.userId) return;
+  //   this.loading = true;
+  //   this.userService.getUserById(this.userId.toString()).pipe(
+  //     takeUntilDestroyed(this.destroyRef),
+  //     finalize(() => this.loading = false)
+  //   ).subscribe({
+  //     next: (user) => {
+  //       // this.userForm.patchValue(user);
+  //       this.cdr.markForCheck();
+  //     },
+  //     error: (err) => {
+  //       console.error('Error loading user:', err);
+  //     }
+  //   });
+  // }
 
   onSubmit(): void {
     if (this.userForm.valid) {
@@ -114,8 +112,7 @@ export class UserEdit implements OnInit {
         ).subscribe({
           next: () => {
             console.log(`User ${this.userId} updated`);
-                    this.cdr.markForCheck();
-
+            this.cdr.markForCheck();
             this.router.navigate(['/users']);
           },
           error: (err) => {

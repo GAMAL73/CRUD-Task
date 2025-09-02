@@ -7,10 +7,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject, finalize } from 'rxjs';
 import { NotFond } from "../../../additions/not-fond/not-fond";
 import { Spinner } from "../../../additions/spinner/spinner";
+import { FormsModule, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-user-list',
-  imports: [CommonModule, NotFond, Spinner],
+  imports: [CommonModule, NotFond, Spinner,FormsModule],
   templateUrl: './user-list.html',
   styleUrl: './user-list.css',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -21,6 +22,8 @@ export class UserList implements OnInit {
   destroyRef = inject(DestroyRef);
   private cdr = inject(ChangeDetectorRef);
   loading: boolean = true;
+  filteredUsers: User_interface[] = [];
+  searchTerm: string = '';
 
   constructor(private userService: User, private router: Router) {}
 
@@ -52,6 +55,7 @@ export class UserList implements OnInit {
     ).subscribe({
       next: () => {
         const currentUsers = this.usersSubject.value;
+
         const updatedUsers = currentUsers.filter(u => u.id !== user.id);
         this.usersSubject.next(updatedUsers);
         console.log(`User ${user.id} deleted`);
@@ -79,4 +83,13 @@ export class UserList implements OnInit {
   addUser(): void {
     this.router.navigate(['/create']);
   }
+
+  onSearch(): void {
+        this.filteredUsers= this.usersSubject.value.filter(user =>
+      user.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      user.email.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+    this.cdr.markForCheck();
+  }
+
 }
